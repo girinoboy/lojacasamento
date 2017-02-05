@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Built-By: mark
+Build-Jdk: 1.8.0_121
+Class-Path: javax.servlet-api-3.1.0.jar slf4j-api-1.7.21.jar commons-l
+ ogging-1.2.jar joda-time-2.9.7.jar
+Created-By: Maven Integration for Eclipse
+

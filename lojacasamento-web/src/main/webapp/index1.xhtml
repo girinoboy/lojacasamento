@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<h:body>
+<h:form >  
+          
+        <!-- Campos obrigatórios -->  
+        <p:inputText name="receiverEmail" type="hidden" value="suporte@lojamodelo.com.br"/>  
+        <p:inputText name="currency" type="hidden" value="BRL"/>  
+  
+        <!-- Itens do pagamento (ao menos um item é obrigatório) -->  
+        <p:inputText name="itemId1" type="hidden" value="0001"/>  
+        <p:inputText name="itemDescription1" type="hidden" value="Notebook Prata"/>  
+        <p:inputText name="itemAmount1" type="hidden" value="24300.00"/>  
+        <p:inputText name="itemQuantity1" type="hidden" value="1"/>  
+        <p:inputText name="itemWeight1" type="hidden" value="1000"/>  
+        <p:inputText name="itemId2" type="hidden" value="0002"/>  
+        <p:inputText name="itemDescription2" type="hidden" value="Notebook Rosa"/>  
+        <p:inputText name="itemAmount2" type="hidden" value="25600.00"/>  
+        <p:inputText name="itemQuantity2" type="hidden" value="2"/>  
+        <p:inputText name="itemWeight2" type="hidden" value="750"/>  
+  
+        <!-- Código de referência do pagamento no seu sistema (opcional) -->  
+        <p:inputText name="reference" type="hidden" value="REF1234"/>  
+          
+        <!-- Informações de frete (opcionais) -->  
+        <p:inputText name="shippingType" type="hidden" value="1"/>  
+        <p:inputText name="shippingAddressPostalCode" type="hidden" value="01452002"/>  
+        <p:inputText name="shippingAddressStreet" type="hidden" value="Av. Brig. Faria Lima"/>  
+        <p:inputText name="shippingAddressNumber" type="hidden" value="1384"/>  
+        <p:inputText name="shippingAddressComplement" type="hidden" value="5o andar"/>  
+        <p:inputText name="shippingAddressDistrict" type="hidden" value="Jardim Paulistano"/>  
+        <p:inputText name="shippingAddressCity" type="hidden" value="Sao Paulo"/>  
+        <p:inputText name="shippingAddressState" type="hidden" value="SP"/>  
+        <p:inputText name="shippingAddressCountry" type="hidden" value="BRA"/>  
+  
+        <!-- Dados do comprador (opcionais) -->  
+        <p:inputText name="senderName" type="hidden" value="José Comprador"/>  
+        <p:inputText name="senderAreaCode" type="hidden" value="11"/>  
+        <p:inputText name="senderPhone" type="hidden" value="56273440"/>  
+        <p:inputText name="senderEmail" type="hidden" value="comprador@uol.com.br"/>  
+  
+        <!-- submit do form (obrigatório) -->  
+        <p:inputText alt="Pague com PagSeguro" name="submit"  type="image" src="https://p.simg.uol.com.br/out/pagseguro/i/botoes/pagamentos/120x53-pagar.gif"/>
+        
+        <p:commandButton alt="Pague com PagSeguro"  action="https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html"></p:commandButton>  
+          
+</h:form>
+</h:body>
+</html>
