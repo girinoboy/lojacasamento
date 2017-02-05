@@ -101,51 +101,10 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 						</manifest>
-					</archive>
-					<webResources>
-                    <resource>
-                    	
-                        <directory>${project.basedir}/src/main/webapp/WEB-INF/lib</directory>
-                        <targetPath>WEB-INF/lib</targetPath>
-                        <includes>
-                            <include>**/*.jar</include>
-                        </includes>
-                    </resource>
-                </webResources>
+					</archive>					
 				</configuration>
-			</plugin>
-          <plugin>
-    <artifactId>maven-resources-plugin</artifactId>
-    <version>2.6</version>
-    <executions>
-        <execution>
-            <id>openshift</id>
-            <!-- may adjust to another phase before package but make sure your plugin is bound to a phase
-            because otherwise it wont be invoked during build! Now its bound to the first phase of the
-            default lifecycle for packaging type war -->
-            <phase>validate</phase>
-            <goals>
-                <!-- use the copy-resources goal of this plugin - it will copy resources :) -->
-                <goal>copy-resources</goal>
-            </goals>
-            <configuration>
-                <!-- this points to /target of the current project, you may adjust it to wherever it must be placed to be packed into the root of the war (just try&error) -->
-                <outputDirectory>${project.build.directory}/lib</outputDirectory>
-                <resources>
-                    <resource>
-                        <!-- this points to a folder /misc under the project root where we expect the lib.jar -->
-                        <directory>${project.basedir}/src/main/webapp/WEB-INF/lib</directory>
-                        <!-- unless you specify what to include anything of the above directory will be included -->
-<!--                         <includes> -->
-<!--                             <include>pagseguro-api-1.0.0.jar</include> -->
-<!--                         </includes> -->
-                    </resource>
-                </resources>
-            </configuration>
-        </execution>
-    </executions>
-</plugin>
+			</plugin>        
 		</plugins>
-		<finalName>WEB</finalName>
+		<finalName>lojacasamento-web</finalName>
 	</build>
 </project>
