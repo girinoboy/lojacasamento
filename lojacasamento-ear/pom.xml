@@ -39,7 +39,7 @@
 						<webModule>
 							<groupId>lojacasamento-ear</groupId>
 							<artifactId>lojacasamento-web</artifactId>
-							<contextRoot>/lojacasamento</contextRoot>
+<!-- 							<contextRoot>/ROOT</contextRoot> -->
 						</webModule>
 					</modules>
 					<outputDirectory>deployments</outputDirectory>                            
