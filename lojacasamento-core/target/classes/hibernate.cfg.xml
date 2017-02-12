@@ -6,15 +6,17 @@
   <session-factory>
 	<!--<property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property> --><!--Mudar dialect do banco-->
 	<!--<property name="hibernate.connection.datasource">java:/oracleDS</property> --><!--DS da pasta deploy Jboss-->
-	<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property> <!-- tipo de dialeto do banco-->
-	<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-<!-- 	<property name="hibernate.dialect">org.hibernate.dialect.HSQLDialect</property>tipo de dialeto do banco -->
-<!-- 	<property name="hibernate.connection.driver_class">com.hsqldb.jdbc.Driver</property> -->
+<!-- 	<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property> tipo de dialeto do banco -->
+<!-- 	<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property> -->
+	<property name="hibernate.dialect">org.hibernate.dialect.HSQLDialect</property><!-- tipo de dialeto do banco -->
+	<property name="hibernate.connection.driver_class">org.hsqldb.jdbcDriver</property>
 	<property name="hibernate.max_fetch_depth">2</property>
 <!-- 	<property name="hibernate.connection.datasource">java:DefaultDS</property> -->
-	<!--<property name="hibernate.connection.username">root</property> -->
-	<!--<property name="hibernate.connection.password">root</property> -->
-	<property name="hibernate.hbm2ddl.auto">update</property>
+	<property name="hibernate.connection.username">sa</property>
+	<property name="hibernate.connection.password"></property>
+<!-- 	<property name="hibernate.connection.url">jdbc:mysql://localhost/loja</property> -->
+	<property name="hibernate.connection.url">jdbc:hsqldb:file:~/data/loja</property>
+	<property name="hibernate.hbm2ddl.auto">create</property>
 	<property name="hibernate.c3p0.max_size">10</property>
 	<property name="hibernate.c3p0.min_size">2</property>
 	<property name="hibernate.c3p0.timeout">5000</property>

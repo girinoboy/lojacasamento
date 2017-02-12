@@ -1,6 +1,9 @@
+/home/mark/git/lojacasamento/lojacasamento-core/src/main/java/br/com/utility/LocaleController.java
+/home/mark/git/lojacasamento/lojacasamento-core/src/main/java/br/com/dto/LojaDTO.java
 /home/mark/git/lojacasamento/lojacasamento-core/src/main/java/br/com/utility/Constantes.java
 /home/mark/git/lojacasamento/lojacasamento-core/src/main/java/br/com/dto/GenericDTO.java
 /home/mark/git/lojacasamento/lojacasamento-core/src/main/java/br/com/dao/GenericDAO.java
 /home/mark/git/lojacasamento/lojacasamento-core/src/main/java/br/com/utility/FilterPhaseListener.java
 /home/mark/git/lojacasamento/lojacasamento-core/src/main/java/br/com/mb/GenericMB.java
 /home/mark/git/lojacasamento/lojacasamento-core/src/main/java/br/com/factory/HibernateUtility.java
+/home/mark/git/lojacasamento/lojacasamento-core/src/main/java/br/com/dto/ProdutoDTO.java

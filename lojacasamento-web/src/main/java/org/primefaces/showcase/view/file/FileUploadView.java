@@ -79,13 +79,24 @@ public class FileUploadView extends GenericMB<LojaDTO>{
     public void handleFileUpload(FileUploadEvent event) {
     	file = event.getFile();
     	
-    	filename = "brand_"+file.getFileName().replaceAll(" ", "-");
+    	filename = file.getFileName().replaceAll(" ", "-");
         byte[] data = file.getContents();
  
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-        String newFileName = externalContext.getRealPath("") + File.separator + "resources" + File.separator + "demo" +
-                                    File.separator + "images" + File.separator + "photocam" + File.separator + filename;
-         
+        String dir = externalContext.getRealPath("") + File.separator + "resources" + File.separator + "demo" +
+		                                    File.separator + "images" + File.separator + "brand" + File.separator;
+		String newFileName = dir + filename;
+		File file = new File(dir);
+        if (!file.exists()) {
+            if (file.mkdir()) {
+                System.out.println("Directory is created!");
+            } else {
+                System.out.println("Failed to create directory!");
+            }
+        }
+        if((new File(newFileName)).exists()){
+        	newFileName = dir +"brand_"+ filename;
+        }
         FileImageOutputStream imageOutput;
         try {
             imageOutput = new FileImageOutputStream(new File(newFileName));
@@ -93,12 +104,12 @@ public class FileUploadView extends GenericMB<LojaDTO>{
             imageOutput.close();
         }
         catch(IOException e) {
-            throw new FacesException("Error in writing captured image.", e);
+            throw new FacesException("Error in writing image.", e);
         }
     	
     	
 //    	salvarArquivo();
-        FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
+        FacesMessage message = new FacesMessage(rb.getString("succesful"), event.getFile().getFileName() + " is uploaded.");
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
     

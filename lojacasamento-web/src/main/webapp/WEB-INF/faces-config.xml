@@ -6,7 +6,7 @@
     
     <application>
 		<resource-bundle>
-			<base-name>br.com.messages.messages</base-name>
+			<base-name>messages</base-name>
 			<var>msgs</var>
 		</resource-bundle>
 		<locale-config>
@@ -14,7 +14,7 @@
 			<supported-locale>en_US</supported-locale>
 		</locale-config>
 		<message-bundle>  
-      		br.com.messages.messages
+      		messages
  		</message-bundle>
 	</application>
     

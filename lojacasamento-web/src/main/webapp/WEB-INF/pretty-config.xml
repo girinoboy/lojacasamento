@@ -19,6 +19,10 @@
 <!-- 	     <action onPostback="false">#{grupo.loadInstance()}</action> -->
 <!-- 	</url-mapping> -->
 	
+	<url-mapping id="favicon">
+		<pattern value="/favicon.ico" />
+		<view-id value="/index.xhtml" />
+	</url-mapping>
 	
 	<url-mapping id="index">
 		<pattern value="/*#{idLoja: criaCheckout.abstractDTO.nome}" />

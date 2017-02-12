@@ -70,7 +70,7 @@
 	 	<p:panel id="panel" header="#{msgs.newProduct}">
 		    <h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
 			    <p:outputPanel id="photo">
-		            <p:graphicImage name="demo/images/photocam/#{fileUploadView.filename}" rendered="#{not empty fileUploadView.filename}" width="120" height="120" />
+		            <p:graphicImage name="demo/images/brand/#{fileUploadView.filename}" rendered="#{not empty fileUploadView.filename}" width="120" height="120" />
 		        </p:outputPanel>
 			    <p:fileUpload fileUploadListener="#{fileUploadView.handleFileUpload}" mode="advanced" dragDropSupport="true" auto="true"
 	                          update="messages,photo" sizeLimit="500000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" required="true"/>
@@ -92,7 +92,7 @@
 	    <p:outputPanel id="panelDetalhe">
 	    <p:repeat value="#{fileUploadView.abstractDTO.listProduto}" var="produto">
 	        <h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
-	            <p:graphicImage name="demo/images/photocam/#{produto.imagem}" width="120" height="120"/> 
+	            <p:graphicImage name="demo/images/brand/#{produto.imagem}" width="120" height="120"/> 
 	            
 	            <p:outputPanel>
 	                <h:panelGrid columns="2" cellpadding="5" >

@@ -76,7 +76,7 @@
 	        <h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
 	            <p:commandLink update=":form:carDetail" oncomplete="PF('carDialog').show()">
 	                <f:setPropertyActionListener value="#{produto}" target="#{criaCheckout.produtoDTO}" />
-	                <p:graphicImage name="demo/images/photocam/#{produto.imagem}" width="120" height="120"/>
+	                <p:graphicImage name="demo/images/brand/#{produto.imagem}" width="120" height="120"/>
 	            </p:commandLink>
 	            
 	            <p:outputPanel>
@@ -113,7 +113,7 @@
         <p:outputPanel id="carDetail" style="text-align:center;">
             <p:panelGrid  columns="2" rendered="#{not empty criaCheckout.produtoDTO}" columnClasses="label,value">
                 <f:facet name="header">
-                	<p:graphicImage name="demo/images/photocam/#{criaCheckout.produtoDTO.imagem}.png" width="120" height="120"/>
+                	<p:graphicImage name="demo/images/brand/#{criaCheckout.produtoDTO.imagem}.png" width="120" height="120"/>
                 </f:facet>
  
                 <h:outputText value="Descricao:" />

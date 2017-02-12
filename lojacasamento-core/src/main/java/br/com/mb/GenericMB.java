@@ -48,7 +48,7 @@ public class GenericMB<T> implements Serializable{
 	public GenericMB() {
 		FacesContext fc = FacesContext.getCurrentInstance();
 		if(fc.getViewRoot() != null)
-			rb = ResourceBundle.getBundle("br.com.messages.messages",fc.getViewRoot().getLocale());
+			rb = ResourceBundle.getBundle("messages",fc.getViewRoot().getLocale());
 		
 //		Class<T>  oclass = (Class<T>)((ParameterizedType)getClass().getGenericSuperclass()).getActualTypeArguments()[0];
 		if(abstractDAO == null){

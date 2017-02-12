@@ -70,10 +70,20 @@ public class FilterPhaseListener implements PhaseListener{
                 }
             }
         }*/
+		boolean lixo = false;
 		FacesContext fc = event.getFacesContext();
 		String viewId = fc.getViewRoot().getViewId();
 		//NavigationHandler nh = fc.getApplication().getNavigationHandler();
 		try {
+			while(!viewId.equals("/") && String.valueOf(viewId.charAt(viewId .length()-1)).equals("/")){
+				viewId = viewId.substring (0, viewId.length() - 1);
+				lixo = true;
+			}
+			if (lixo) {
+				FacesContext.getCurrentInstance().getExternalContext().redirect(viewId);
+				return;
+			}
+
 			if (viewId != null && !viewId.equals("/")) {
 				HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 				Object usuario =  session.getAttribute(getValor("USUARIO_AUTENTICADO"));
