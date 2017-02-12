@@ -6,6 +6,7 @@ org/primefaces/showcase/service/CarService.class
 org/primefaces/showcase/domain/Car.class
 br/com/dto/MenuDTO.class
 br/com/mb/InstallmentList.class
+org/primefaces/showcase/view/data/CarouselView.class
 br/com/mb/SearchTransactions.class
 br/com/dto/PerfilDTO.class
 org/primefaces/showcase/view/multimedia/ImagesView.class

@@ -23,8 +23,11 @@ public class SearchTransactions {
 	      LocalDate data1 = LocalDate.now(),data2 = LocalDate.now();
 	      System.out.println(data2);
 	      final DataList<? extends TransactionSummary> transactions =
-	          pagSeguro.transactions().search().byDateRange(new DateRangeBuilder().between(data1.parse("2017-02-01").toDate(), new Date()), 1, 10);
+	          pagSeguro.transactions().search().byDateRange(new DateRangeBuilder().between(data1.parse("2017-02-01").toDate(), new Date()), 1, 1000);
 	      System.out.println(transactions.size());
+	      for (TransactionSummary transactionSummary : transactions) {
+			System.out.println(transactionSummary.getDetail());
+		}
 	    }catch (Exception e){
 	      e.printStackTrace();
 	    }

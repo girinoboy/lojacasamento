@@ -6,6 +6,7 @@ package br.com.utility;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import java.util.ResourceBundle;
 
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseEvent;
@@ -32,6 +33,14 @@ public class FilterPhaseListener implements PhaseListener{
 	 */
 	public FilterPhaseListener() {
 		props = new Properties();
+		System.out.print("procura o resource no mesmo diretorio do .class:");
+		System.out.println(getClass().getResourceAsStream(nomeDoProperties));
+		System.out.print("procura no CLASSPATH:");
+		System.out.println(getClass().getClassLoader().getResourceAsStream(nomeDoProperties));
+		
+		System.out.println(Thread.currentThread().getContextClassLoader().getResourceAsStream(nomeDoProperties));
+		System.out.println(Thread.currentThread().getContextClassLoader().getSystemResourceAsStream(nomeDoProperties));
+		System.out.println(ResourceBundle.getBundle("constantes").getString("USUARIO_AUTENTICADO"));
         InputStream in = this.getClass().getClassLoader().getResourceAsStream(nomeDoProperties);
         try{
                 props.load(in);
@@ -65,7 +74,7 @@ public class FilterPhaseListener implements PhaseListener{
 		String viewId = fc.getViewRoot().getViewId();
 		//NavigationHandler nh = fc.getApplication().getNavigationHandler();
 		try {
-			if (viewId != null) {
+			if (viewId != null && !viewId.equals("/")) {
 				HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 				Object usuario =  session.getAttribute(getValor("USUARIO_AUTENTICADO"));
 				String pagina = FacesContext.getCurrentInstance().getExternalContext().getRequestServletPath();
@@ -75,13 +84,13 @@ public class FilterPhaseListener implements PhaseListener{
 //						session.removeAttribute(Constantes.USUARIO_AUTENTICADO);
 //						session.removeAttribute(Constantes.INDEX_CONTROLLER);
 //						nh.handleNavigation(fc, null, "pretty:login");
-						FacesContext.getCurrentInstance().getExternalContext().redirect(getValor("PAGINA_INDEX"));
+//						FacesContext.getCurrentInstance().getExternalContext().redirect(getValor("PAGINA_INDEX"));
 					}
 				}else if(!pagina.equals("/"+getValor("PAGINA_LOGIN"))){
 					session.removeAttribute(getValor("USUARIO_AUTENTICADO"));
 					session.removeAttribute(getValor("INDEX_CONTROLLER"));
 					//nh.handleNavigation(fc, null, "pretty:acessoNegado");
-					FacesContext.getCurrentInstance().getExternalContext().redirect(getValor("PAGINA_LOGIN"));
+//					FacesContext.getCurrentInstance().getExternalContext().redirect(getValor("PAGINA_LOGIN"));
 				}
 			}else{
 				FacesContext.getCurrentInstance().getExternalContext().redirect(getValor("PAGINA_LOGIN"));

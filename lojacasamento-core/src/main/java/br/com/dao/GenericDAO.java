@@ -13,6 +13,7 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.LockOptions;
 import org.hibernate.Session;
+import org.hibernate.criterion.Example;
 import org.hibernate.criterion.Restrictions;
 
 import br.com.factory.HibernateUtility;
@@ -96,7 +97,7 @@ public class GenericDAO<T, ID extends Serializable> implements Serializable {
             List<T> list = HibernateUtility.getSession().createCriteria(oClass)
             		//.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
             		.list();
-            //HibernateUtility.closeSession();
+            HibernateUtility.closeSession();
             return (List<T>) list;
         } catch (HibernateException hibernateException) {
             cancel();
@@ -105,7 +106,23 @@ public class GenericDAO<T, ID extends Serializable> implements Serializable {
         	HibernateUtility.closeSession();
         }
     }
-
+    
+    public List<T> list(T entity) throws Exception {
+        try {
+            List<T> list = HibernateUtility.getSession().createCriteria(entity.getClass())
+            		.add(Example.create( entity ).enableLike().excludeZeroes())
+            		//.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
+            		.list();
+            HibernateUtility.closeSession();
+            return (List<T>) list;
+        } catch (HibernateException hibernateException) {
+            cancel();
+            throw hibernateException;
+        }finally{
+        	HibernateUtility.closeSession();
+        }
+    }
+    
     public T getById(Serializable id) throws Exception {
         try {
             return (T) HibernateUtility.getSession().get(oClass, id);

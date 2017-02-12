@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<h:head>
+<style>
+		.ui-galleria-panel-wrapper {
+		    display:none;
+		}
+		.logo {
+            width: 5%
+        }
+        
+        .detail {
+            width: 95%;
+            padding-left: 25px;
+        }
+        
+        .detail td {
+            font-size: 24px;
+        }
+        
+        .item {
+            border-bottom: 1px solid #A8A8A8;
+            padding: 25px 10px;
+        }
+        .ui-panelgrid-footer {
+		    text-align: center;
+		    padding: 2px 5px;
+		}
+	</style>
+</h:head>
+<h:body>
+<f:view locale="#{localeController.currentLocale}">
+	<h:form enctype="multipart/form-data">
+	    <p:growl id="messages" showDetail="true" />
+	    
+	    <p:toolbar id="tb">
+		    <f:facet name="left">
+			    <p:commandButton id="dynaButton" type="button" icon="fa fa-bars"/>
+			    <p:menu overlay="true" trigger="dynaButton" my="left top" at="left bottom">
+			    	<p:menuitem value="Homepage" actionListener="#{criaCheckout.redirecionar('/')}" icon="ui-icon-home"/>
+			        <p:submenu label="#{msgs.configuration}">
+			            <p:menuitem value="#{msgs.edit}"  outcome="pretty:config" icon="ui-icon-gear">
+			            	<f:param name="idLoja" value="#{criaCheckout.abstractDTO.nome}" />
+			            </p:menuitem>
+			            <p:separator />
+			            <p:menuitem value="#{msgs.about}" onclick="PF('aboutDialog').show()" icon="ui-icon-extlink"/>
+			        </p:submenu>
+			    </p:menu>
+		    </f:facet>
+		     <f:facet name="header">
+		    	 <p:commandButton type="button" title="Save3" icon="ui-icon-disk" value="SFSDF"/>
+		     </f:facet>
+		    <f:facet name="right">
+		        <p:commandButton type="button" title="Save" icon="ui-icon-disk"/>
+		        <p:commandButton type="button" title="Delete" icon="ui-icon-trash"/>
+		        <p:commandButton type="button" title="Print" icon="ui-icon-print"/>
+		    </f:facet>
+		</p:toolbar>
+ 
+		<p:sticky target="tb" />
+	    
+	 	<p:panel id="panel" header="#{msgs.newProduct}">
+		    <h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
+			    <p:outputPanel id="photo">
+		            <p:graphicImage name="demo/images/photocam/#{fileUploadView.filename}" rendered="#{not empty fileUploadView.filename}" width="120" height="120" />
+		        </p:outputPanel>
+			    <p:fileUpload fileUploadListener="#{fileUploadView.handleFileUpload}" mode="advanced" dragDropSupport="true" auto="true"
+	                          update="messages,photo" sizeLimit="500000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" required="true"/>
+		    </h:panelGrid>
+		 	<h:panelGrid columns="2" cellpadding="5">
+		 		<p:outputLabel for="idDescricao" value="#{msgs.description}:" />
+	            
+	            <p:outputLabel for="idPreco" value="#{msgs.price}:" />
+	            <p:inputText id="idDescricao" value="#{fileUploadView.produtoDTO.descricao}" required="true" label="#{msgs.description}"/>
+	            
+	            <p:inputNumber id="idPreco" value="#{fileUploadView.produtoDTO.preco}" decimalPlaces="2" required="true" emptyValue="empty" minValue="0" decimalSeparator="," thousandSeparator="."/>
+	            
+		    </h:panelGrid>
+	<!-- 		<p:fileUpload value="#{fileUploadView.file}" mode="simple" skinSimple="true" update="photo"/> -->
+		    <p:commandButton value="#{msgs.save}" ajax="true" actionListener="#{fileUploadView.upload}" update="panel,panelDetalhe"/>
+	    </p:panel>
+	    <br/>
+	    <p:separator />
+	    <p:outputPanel id="panelDetalhe">
+	    <p:repeat value="#{fileUploadView.abstractDTO.listProduto}" var="produto">
+	        <h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
+	            <p:graphicImage name="demo/images/photocam/#{produto.imagem}" width="120" height="120"/> 
+	            
+	            <p:outputPanel>
+	                <h:panelGrid columns="2" cellpadding="5" >
+	                    <h:outputText value="Descrição:" />
+	                    <h:outputText value="#{produto.descricao}" style="font-weight: bold"/>
+	 
+	                    <h:outputText value="Preço:" />
+	                    <h:outputText value="$#{produto.preco}" style="font-weight: bold"/>
+	                </h:panelGrid>
+	            <p:chart type="bar" model="#{chartView.creatBar(produto)}" style="height:60px"/>
+	            </p:outputPanel>
+	            
+	        </h:panelGrid>
+	        <hr />
+	    </p:repeat>
+	    </p:outputPanel>
+	    
+	    <p:dialog header="Modal Dialog" widgetVar="aboutDialog" modal="true" height="100">
+	    	<h:outputText value="See more in https://github.com/girinoboy/lojacasamento" />
+		</p:dialog> 
+	    
+	    <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+ 
+		<p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+		    <p:graphicImage name="/demo/images/ajaxloadingbar.gif" />
+		</p:dialog>
+	</h:form>
+</f:view>
+</h:body>
+</html>

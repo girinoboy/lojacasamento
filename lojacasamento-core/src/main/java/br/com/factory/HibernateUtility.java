@@ -68,6 +68,7 @@ public class HibernateUtility {
 		Transaction transaction = transactionThread.get();
 		if ((transaction != null) && (!(transaction.wasCommitted())) && (!(transaction.wasRolledBack()))) {
 			transaction.rollback();
+			if(!transaction.wasRolledBack())
 			transaction.begin();  
 			transactionThread.set(null);
 		}

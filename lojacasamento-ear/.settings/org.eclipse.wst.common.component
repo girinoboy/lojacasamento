@@ -53,6 +53,9 @@
         <dependent-module archiveName="commons-lang3-3.5.jar" deploy-path="/" handle="module:/classpath/var/M2_REPO/org/apache/commons/commons-lang3/3.5/commons-lang3-3.5.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="hsqldb-2.3.4.jar" deploy-path="/" handle="module:/classpath/var/M2_REPO/org/hsqldb/hsqldb/2.3.4/hsqldb-2.3.4.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="joda-time-2.9.7.jar" deploy-path="/" handle="module:/classpath/var/M2_REPO/joda-time/joda-time/2.9.7/joda-time-2.9.7.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>

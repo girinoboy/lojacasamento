@@ -2,6 +2,7 @@ package br.com.mb;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.ParameterizedType;
 import java.util.Date;
 import java.util.List;
@@ -38,7 +39,10 @@ public class GenericMB<T> implements Serializable{
 	
 	
 	public void inicio() throws Exception{
-		abstractList =  abstractDAO.list();
+		abstractList =  abstractDAO.list(abstractDTO);
+		if(!abstractList.isEmpty()){
+			abstractDTO = abstractList.iterator().next();
+		}
 	}
 	
 	public GenericMB() {
@@ -51,6 +55,11 @@ public class GenericMB<T> implements Serializable{
 			abstractDAO = new GenericDAO<T, Serializable>(oclass);
 		}
 		try {
+			abstractDTO = oclass.newInstance();
+//			Constructor<?>[] a = oclass.getDeclaredConstructors();
+//			for (Constructor<?> constructor : a) {
+//				constructor.newInstance(new GenericDTO());
+//			}
 			abstractList = abstractDAO.list();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

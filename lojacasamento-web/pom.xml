@@ -79,12 +79,29 @@
 		    <artifactId>commons-fileupload</artifactId>
 		    <version>1.3.2</version>
 		</dependency>
-
+		
+		<dependency>
+		    <groupId>org.omnifaces</groupId>
+		    <artifactId>omnifaces</artifactId>
+		    <version>1.14</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.primefaces.themes</groupId>
 			<artifactId>aristo</artifactId>
 			<version>1.0.1</version>
+		</dependency>
+		
+		<!-- prettyfaces for JSF 2.x -->
+		<dependency>
+		    <groupId>org.ocpsoft.rewrite</groupId>
+		    <artifactId>rewrite-servlet</artifactId>
+		    <version>3.4.1.Final</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.ocpsoft.rewrite</groupId>
+		    <artifactId>rewrite-config-prettyfaces</artifactId>
+		    <version>3.4.1.Final</version>
 		</dependency>
 
 	</dependencies>

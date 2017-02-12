@@ -1,0 +1,35 @@
+<pretty-config xmlns="http://ocpsoft.org/schema/rewrite-config-prettyfaces" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="http://ocpsoft.org/schema/rewrite-config-prettyfaces
+                      http://ocpsoft.org/xml/ns/prettyfaces/rewrite-config-prettyfaces.xsd">
+
+<!-- 	<url-mapping id="login"> -->
+<!-- 		<pattern value="/login" /> -->
+<!-- 		<view-id value="/legacy/user/login.jsp" /> -->
+<!-- 	</url-mapping> -->
+	
+<!-- 	<url-mapping id="view-user"> -->
+<!-- 		<pattern value="/user/#{username}" /> -->
+<!-- 		<view-id value="/user/view.xhtml" /> -->
+<!-- 	</url-mapping> -->
+	
+<!-- 	<url-mapping id="url-exibir-grupo"> -->
+<!-- 	     <pattern value="/grupo/exibir/#{codigo : grupoBean.codigoGrupo}"></pattern> -->
+<!-- 	     <view-id value="/pages/grupo.jsf" /> -->
+<!-- 	     <action onPostback="false">#{grupo.loadInstance()}</action> -->
+<!-- 	</url-mapping> -->
+	
+	
+	<url-mapping id="index">
+		<pattern value="/*#{idLoja: criaCheckout.abstractDTO.nome}" />
+		<view-id value="/index.xhtml" />
+		<action onPostback="false">#{criaCheckout.inicio}</action>	
+	</url-mapping>
+
+	<url-mapping id="config">
+		<pattern value="/#{idLoja: fileUploadView.abstractDTO.nome}/config" />
+		<view-id value="/fileupload.xhtml" />
+		<action onPostback="false">#{fileUploadView.inicio}</action>	
+	</url-mapping>
+
+</pretty-config>

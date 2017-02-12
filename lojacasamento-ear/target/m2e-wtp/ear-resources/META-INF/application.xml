@@ -7,7 +7,7 @@
   <module>
     <web>
       <web-uri>lojacasamento-web-1.0.war</web-uri>
-      <context-root>/lojacasamento</context-root>
+      <context-root>/</context-root>
     </web>
   </module>
   <module>

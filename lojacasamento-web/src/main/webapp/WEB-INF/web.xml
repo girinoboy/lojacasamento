@@ -20,7 +20,108 @@
 	   <param-name>primefaces.FONT_AWESOME</param-name>
 	   <param-value>true</param-value>
 	</context-param>
+	<context-param>
+	    <param-name>org.apache.myfaces.SERIALIZE_STATE_IN_SESSION</param-name>
+	    <param-value>false</param-value>
+	</context-param>
 
+	<!-- resolve erro de inicializacao, para n instancia biblioteca errada -->
+	<context-param>
+		<param-name>org.jboss.jbossfaces.WAR_BUNDLES_JSF_IMPL</param-name>
+		<param-value>true</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>javax.faces.PARTIAL_STATE_SAVING</param-name>
+		<param-value>false</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>facelets.SKIP_COMMENTS</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	
+	 <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/application-context.xml</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>javax.faces.DEFAULT_SUFFIX</param-name>
+        <param-value>.xhtml</param-value>
+    </context-param>
+	
+	<!-- para fileUpload -->
+	<context-param>
+	    <param-name>primefaces.UPLOADER</param-name>
+	    <param-value>commons</param-value>
+	</context-param>
+	<filter>
+		<filter-name>PrimeFaces FileUpload Filter</filter-name>
+		<filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
+		<init-param>
+		  <param-name>thresholdSize</param-name>
+		  <param-value>5000000</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>PrimeFaces FileUpload Filter</filter-name>
+		<servlet-name>Faces Servlet</servlet-name>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+	<listener>
+	  <listener-class>org.apache.myfaces.webapp.StartupServletContextListener</listener-class>
+	</listener>
+	<!-- fim para fileUpload -->
+<!-- 	<context-param> -->
+<!-- 		<param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name> -->
+<!-- 		<param-value>resources.application</param-value> -->
+<!-- 	 </context-param> -->
+<!-- 	 <context-param> -->
+<!-- 	   <description>State saving method: 'client' or 'server' (=default). See JSF Specification 2.5.2</description> -->
+<!-- 	   <param-name>javax.faces.STATE_SAVING_METHOD</param-name> -->
+<!-- 	   <param-value>client</param-value> -->
+<!-- 	 </context-param> -->
+	 <context-param>
+	   <description>
+	   This parameter tells MyFaces if javascript code should be allowed in
+	   the rendered HTML output.
+	   If javascript is allowed, command_link anchors will have javascript code
+	   that submits the corresponding form.
+	   If javascript is not allowed, the state saving info and nested parameters
+	   will be added as url parameters.
+	   Default is 'true'</description>
+	   <param-name>org.apache.myfaces.ALLOW_JAVASCRIPT</param-name>
+	   <param-value>true</param-value>
+	</context-param>
+	<context-param>
+		<description>
+	    If true, rendered HTML code will be formatted, so that it is 'human-readable'
+	    i.e. additional line separators and whitespace will be written, that do not
+	    influence the HTML code.
+	    Default is 'true'</description>
+		<param-name>org.apache.myfaces.PRETTY_HTML</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	<context-param>
+		<param-name>org.apache.myfaces.DETECT_JAVASCRIPT</param-name>
+		<param-value>false</param-value>
+	</context-param>
+	<context-param>
+	    <description>
+	    If true, a javascript function will be rendered that is able to restore the
+	    former vertical scroll on every request. Convenient feature if you have pages
+	    with long lists and you do not want the browser page to always jump to the top
+	    if you trigger a link or button action that stays on the same page.
+	    Default is 'false'
+		</description>
+	    <param-name>org.apache.myfaces.AUTO_SCROLL</param-name>
+	    <param-value>true</param-value>
+	</context-param>
+	<listener>
+	  	<listener-class>org.apache.myfaces.webapp.StartupServletContextListener</listener-class>
+	</listener>
+  
 	<!-- Welcome page -->
 	<welcome-file-list>
 		<welcome-file>index.xhtml</welcome-file>
@@ -50,5 +151,33 @@
 		<servlet-name>Faces Servlet</servlet-name>
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>/*</url-pattern>
+	</servlet-mapping>
+	
+	<context-param>
+		<param-name>com.ocpsoft.pretty.BASE_PACKAGES</param-name>
+		<param-value>br.com.mb</param-value>
+	</context-param>
+	
+<!-- 	<servlet-mapping> -->
+<!-- 		<servlet-name>Faces Servlet</servlet-name> -->
+<!-- 		<url-pattern>/*</url-pattern> -->
+<!-- 	</servlet-mapping> -->
+
+<!-- <filter> -->
+<!--     <filter-name>Pretty Filter</filter-name> -->
+<!--     <filter-class>com.ocpsoft.pretty.PrettyFilter</filter-class> -->
+<!-- </filter> -->
+
+<!-- <filter-mapping>  -->
+<!--     <filter-name>Pretty Filter</filter-name>  -->
+<!--     <url-pattern>/*</url-pattern>  -->
+<!--     <dispatcher>FORWARD</dispatcher>  -->
+<!--     <dispatcher>REQUEST</dispatcher>  -->
+<!--     <dispatcher>ERROR</dispatcher> -->
+<!-- </filter-mapping>  -->
+
 	
 </web-app>
