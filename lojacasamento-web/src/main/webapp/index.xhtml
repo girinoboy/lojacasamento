@@ -45,7 +45,9 @@
 		    <f:facet name="left">
 			    <p:commandButton id="dynaButton" type="button" icon="fa fa-bars"/>
 			    <p:menu overlay="true" trigger="dynaButton" my="left top" at="left bottom">
-			    	<p:menuitem value="Homepage" actionListener="#{criaCheckout.redirecionar('/')}" icon="ui-icon-home"/>
+			    	<p:menuitem value="Homepage" outcome="pretty:index" icon="ui-icon-home">
+			    		<f:param name="idLoja" value="#{criaCheckout.abstractDTO.nome}" />
+			    	</p:menuitem>
 			        <p:submenu label="#{msgs.configuration}">
 			            <p:menuitem value="#{msgs.edit}"  outcome="pretty:config" icon="ui-icon-gear">
 			            	<f:param name="idLoja" value="#{criaCheckout.abstractDTO.nome}" />
