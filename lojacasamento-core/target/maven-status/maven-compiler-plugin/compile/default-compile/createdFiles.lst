@@ -1,9 +1,0 @@
-br/com/dao/GenericDAO.class
-br/com/utility/FilterPhaseListener.class
-br/com/dto/GenericDTO.class
-br/com/dto/ProdutoDTO.class
-br/com/dto/LojaDTO.class
-br/com/utility/Constantes.class
-br/com/factory/HibernateUtility.class
-br/com/utility/LocaleController.class
-br/com/mb/GenericMB.class

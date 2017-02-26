@@ -18,6 +18,7 @@ import org.hibernate.service.ServiceRegistry;
 
 import br.com.dto.LojaDTO;
 import br.com.dto.ProdutoDTO;
+import br.com.dto.TransacaoDTO;
 
 
 
@@ -90,6 +91,7 @@ public class HibernateUtility {
 				configuration.addPackage("br.com.dto");
 				configuration.addAnnotatedClass(LojaDTO.class);
 				configuration.addAnnotatedClass(ProdutoDTO.class);
+				configuration.addAnnotatedClass(TransacaoDTO.class);
 				//CADASTROS abaixo coloque todas classes que deseja ser modelo para criacao do banco de dados
 				for(Class<?> clazz : getClasses("br.com.dto")){
 					configuration.addAnnotatedClass(clazz);

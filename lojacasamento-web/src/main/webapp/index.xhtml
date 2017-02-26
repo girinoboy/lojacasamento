@@ -111,17 +111,17 @@
 	        <hr />
 	    </p:repeat>
  
-    <p:dialog header="Car Info" widgetVar="carDialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false" focus="valor1">
+    <p:dialog header="#{msgs.productInfo}" widgetVar="carDialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false" focus="valor1">
         <p:outputPanel id="carDetail" style="text-align:center;">
             <p:panelGrid  columns="2" rendered="#{not empty criaCheckout.produtoDTO}" columnClasses="label,value">
                 <f:facet name="header">
-                	<p:graphicImage name="demo/images/brand/#{criaCheckout.produtoDTO.imagem}.png" width="120" height="120"/>
+                	<p:graphicImage name="demo/images/brand/#{criaCheckout.produtoDTO.imagem}" width="120" height="120"/>
                 </f:facet>
  
-                <h:outputText value="Descricao:" />
+                <h:outputText value="#{msgs.description}:" />
                 <h:outputText value="#{criaCheckout.produtoDTO.descricao}" />
  
-                <h:outputText value="Preco" />
+                <h:outputText value="#{msgs.price}:" />
                 <h:outputText value="$#{criaCheckout.produtoDTO.preco}" />
                 
                 <p:outputLabel for="valor1" value="R$" />
@@ -137,7 +137,7 @@
     </p:dialog>
     
  
-    <p:dialog header="Quantidade a pagar" widgetVar="dlg" focus="valor">
+    <p:dialog header="#{msgs.contributeWith}" widgetVar="dlg" focus="valor">
         <h:panelGrid columns="3" cellpadding="5">
             <p:outputLabel for="valor" value="R$" />
             <p:inputNumber id="valor" value="#{criaCheckout.valorDoacao}" decimalPlaces="2" required="true" emptyValue="empty" minValue="1" decimalSeparator="," thousandSeparator=".">

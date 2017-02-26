@@ -3,14 +3,18 @@ package br.com.mb;
 import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import javax.annotation.PostConstruct;
+import javax.faces.FacesException;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 import br.com.dto.LojaDTO;
 import br.com.dto.ProdutoDTO;
@@ -196,12 +200,34 @@ public class CriaCheckout extends GenericMB<LojaDTO>{
 //		      checkoutCode = registeredCheckout.getCheckoutCode();
 		      valorUsual = valorDoacao;
 		      System.out.println(abstractDTO);
+		      HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		      String url = request.getRequestURL().toString();
+		      String uri = request.getRequestURI();
+		      System.out.println(url);
+		      HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		      String url2 = req.getRequestURL().toString();
+		       String a = url2.substring(0, url2.length() - request.getRequestURI().length()) + request.getContextPath() + "/";
+		       System.out.println(a);
+		       getApplicationUri();
 		    }catch (Exception e){
 		      e.printStackTrace();
 		    }
 		
 		
 	}
+	
+	public String getApplicationUri() {
+		  try {
+		    FacesContext ctxt = FacesContext.getCurrentInstance();
+		    ExternalContext ext = ctxt.getExternalContext();
+		    URI uri = new URI(ext.getRequestScheme(),
+		          null, ext.getRequestServerName(), ext.getRequestServerPort(),
+		          ext.getRequestContextPath(), null, null);
+		    return uri.toASCIIString();
+		  } catch (URISyntaxException e) {
+		    throw new FacesException(e);
+		  }
+		}
 	
 	public void redirecionar(){
 		System.out.println(this.valorDoacao);
@@ -317,8 +343,12 @@ public class CriaCheckout extends GenericMB<LojaDTO>{
 		                  )
 		              )
 		      );
-		      System.out.println(registeredCheckout.getRedirectURL());
-		      FacesContext.getCurrentInstance().getExternalContext().redirect(registeredCheckout.getRedirectURL());
+		      HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		      String url = request.getRequestURL().toString();
+//		      String uri = request.getRequestURI();
+		      url = url.substring(0, url.length() - request.getRequestURI().length()) + request.getContextPath() + "/"+abstractDTO.getNome();
+		      System.out.println(registeredCheckout.getRedirectURL()+"&redirectURL="+url);
+		      FacesContext.getCurrentInstance().getExternalContext().redirect(registeredCheckout.getRedirectURL()+"&redirectURL="+url);
 		      checkoutCode = registeredCheckout.getCheckoutCode();
 		    }catch (Exception e){
 		      e.printStackTrace();

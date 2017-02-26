@@ -2,10 +2,12 @@ package org.primefaces.showcase.view.file;
  
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.enterprise.inject.Any;
 import javax.faces.FacesException;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -13,13 +15,16 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.imageio.stream.FileImageOutputStream;
+import javax.inject.Inject;
 
 import org.hibernate.HibernateException;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
+import br.com.dao.GenericDAO;
 import br.com.dto.LojaDTO;
 import br.com.dto.ProdutoDTO;
+import br.com.dto.TransacaoDTO;
 import br.com.mb.GenericMB;
  
 @ManagedBean
@@ -35,15 +40,18 @@ public class FileUploadView extends GenericMB<LojaDTO>{
     
     private String filename;
     private ProdutoDTO produtoDTO = new ProdutoDTO();
+    @Inject
+    protected GenericDAO<ProdutoDTO, Serializable> produtoDAO;
     
-    public FileUploadView() throws HibernateException, Exception{
+//    public FileUploadView() throws HibernateException, Exception{
 //    	List<?> list = abstractDAO.consultaHQL("FROM LojaDTO l WHERE l.nome ="+abstractDTO.getLojaDTO().getNome());
 //    	if(!list.isEmpty()){
 //	    	LojaDTO lojaDTO = (LojaDTO) list.iterator().next();
 //	    	abstractDTO.setLojaDTO(lojaDTO);
 //    	}
-    	System.out.println(abstractDTO);
-    }
+//    	produtoDAO = null;// new GenericDAO<ProdutoDTO, Serializable>(ProdutoDTO.class);
+//    	System.out.println(abstractDTO);
+//    }
     
     public void upload() {
         if(file != null) {
@@ -58,15 +66,16 @@ public class FileUploadView extends GenericMB<LojaDTO>{
 		
         
         try {
-        	List<ProdutoDTO> listProduto = new ArrayList<ProdutoDTO>();
-        	
+//        	List<ProdutoDTO> listProduto = new ArrayList<ProdutoDTO>();
+        	abstractDTO = abstractDAO.getById(abstractDTO)==null? abstractDTO:abstractDAO.getById(abstractDTO);
 //        	produtoDTO.setDescricao("Descricao do produto");
 //        	produtoDTO.setPreco(new BigDecimal(getRandomImageName()));
         	produtoDTO.setImagem(filename);
         	produtoDTO.setLojaDTO(abstractDTO);
-			listProduto.add(produtoDTO);
-        	abstractDTO.setListProduto(listProduto);;
-			abstractDAO.save(abstractDTO);
+//			listProduto.add(produtoDTO);
+//        	abstractDTO.setListProduto(listProduto);;
+//			abstractDAO.save(abstractDTO);
+			produtoDAO.save(produtoDTO);
 			produtoDTO = new ProdutoDTO();
 			filename = null;
 			inicio();

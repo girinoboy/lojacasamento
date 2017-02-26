@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<h:head>
+<% response.addHeader("Access-Control-Allow-Origin", "https://sandbox.pagseguro.uol.com.br");  %>
+<f:event type="preRenderView" listener="#{facesContext.externalContext.response.setHeader('Access-Control-Allow-Origin', 'https://sandbox.pagseguro.uol.com.br')}" />
+response.addHeader("Access-Control-Allow-Origin", "https://sandbox.pagseguro.uol.com.br");
+</h:head>
+<h:body>
+<h:form id="form">
+</h:form>
+</h:body>
+</html>

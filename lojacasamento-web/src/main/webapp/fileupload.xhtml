@@ -63,7 +63,7 @@
 		    <f:facet name="right">
 		        <p:commandButton type="button" title="Save" icon="ui-icon-disk"/>
 		        <p:commandButton type="button" title="Delete" icon="ui-icon-trash"/>
-		        <p:commandButton type="button" title="Print" icon="ui-icon-print"/>
+		        <p:commandButton type="button" title="Print" icon="ui-icon-print" />
 		    </f:facet>
 		</p:toolbar>
  
@@ -104,7 +104,7 @@
 	                    <h:outputText value="Preço:" />
 	                    <h:outputText value="$#{produto.preco}" style="font-weight: bold"/>
 	                </h:panelGrid>
-	            <p:chart type="bar" model="#{chartView.creatBar(produto)}" style="height:60px"/>
+	            <p:chart type="bar" model="#{chartView.creatBar(null)}" style="height:60px"/>
 	            </p:outputPanel>
 	            
 	        </h:panelGrid>

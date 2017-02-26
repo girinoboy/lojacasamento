@@ -30,12 +30,16 @@ public class LojaDTO extends GenericDTO{
 	private String nome;
 	
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@OneToMany(mappedBy = "lojaDTO", targetEntity = ProdutoDTO.class, fetch = FetchType.LAZY, cascade= {CascadeType.PERSIST, CascadeType.MERGE})
+	@OneToMany(mappedBy = "lojaDTO", targetEntity = ProdutoDTO.class, fetch = FetchType.LAZY, cascade= {CascadeType.PERSIST,CascadeType.REFRESH})
 	private List<ProdutoDTO> listProduto;
 
 	public LojaDTO() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	public LojaDTO(String reference) {
+		this.nome = reference;
 	}
 
 	public String getNome() {

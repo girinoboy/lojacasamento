@@ -7,6 +7,7 @@ import java.util.Date;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
 
 import org.joda.time.LocalDate;
 import org.primefaces.model.chart.Axis;
@@ -14,7 +15,9 @@ import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.BarChartModel;
 import org.primefaces.model.chart.HorizontalBarChartModel;
 
+import br.com.dao.GenericDAO;
 import br.com.dto.ProdutoDTO;
+import br.com.dto.TransacaoDTO;
 import br.com.uol.pagseguro.api.PagSeguro;
 import br.com.uol.pagseguro.api.PagSeguroEnv;
 import br.com.uol.pagseguro.api.common.domain.DataList;
@@ -153,6 +156,13 @@ public class ChartView implements Serializable {
     	horizontalBarModel.setStacked(true);
     	horizontalBarModel.setAnimate(true);
     	try {
+    		
+    		for (TransacaoDTO transacao : produtoDTO.getListTransacao()) {
+    			ChartSeries produto = new ChartSeries();
+    			produto.set("Arrecadado", transacao.getGrossAmount().subtract(transacao.getExtraAmount()));
+				horizontalBarModel.addSeries(produto);
+			}
+    		/*
     		final DataList<? extends TransactionSummary> transactions =
     				pagSeguro.transactions().search().byReference(produtoDTO.getLojaDTO().getNome());
 
@@ -165,6 +175,9 @@ public class ChartView implements Serializable {
     				horizontalBarModel.addSeries(produto);
     			}
     		}
+    		*/
+    		
+    		
 
     	}catch (Exception e){
     		e.printStackTrace();

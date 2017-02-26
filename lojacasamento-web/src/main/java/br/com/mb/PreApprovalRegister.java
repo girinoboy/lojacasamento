@@ -79,8 +79,8 @@ public class PreApprovalRegister {
 	                              .getTime())
 	                  )
 	              )
-	              .withRedirectURL("http:localhost.WEB/redirect")
-	              .withNotificationURL("http:localhost.WEB/notification")
+	              .withRedirectURL("http://www.loja1.com.br/WEB/redirect")
+	              .withNotificationURL("http://www.loja1.com.br/WEB/notification")
 	      );
 	      System.out.println(registeredPreApproval.getRedirectURL());
 	    }catch (Exception e){

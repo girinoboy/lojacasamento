@@ -1,7 +1,6 @@
 package br.com.dao;
 
 import java.io.Serializable;
-import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -25,21 +24,21 @@ public class GenericDAO<T, ID extends Serializable> implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private final Class<T> oClass;
+	private  Class<T> oClass=null;
 	public Session session ;
 	public Criteria criteria;
 
-    public GenericDAO() {
-        this.oClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
-        try {
-			session = HibernateUtility.getSession();
-			criteria = session.createCriteria(oClass);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-    }
+//    public GenericDAO() {
+//        this.oClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+//        try {
+//			session = HibernateUtility.getSession();
+//			criteria = session.createCriteria(oClass);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//    }
 
-    public GenericDAO(Class<T> oClass) {
+	public GenericDAO(Class<T> oClass) {
     	 this.oClass = oClass;
     	 try {
  			session = HibernateUtility.getSession();
@@ -115,6 +114,20 @@ public class GenericDAO<T, ID extends Serializable> implements Serializable {
             		.list();
             HibernateUtility.closeSession();
             return (List<T>) list;
+        } catch (HibernateException hibernateException) {
+            cancel();
+            throw hibernateException;
+        }finally{
+        	HibernateUtility.closeSession();
+        }
+    }
+    
+    public T getById(T entity) throws Exception {
+        try {
+        	return (T) HibernateUtility.getSession().createCriteria(entity.getClass())
+            		.add(Example.create( entity ).enableLike().excludeZeroes())
+            		//.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
+            		.uniqueResult();
         } catch (HibernateException hibernateException) {
             cancel();
             throw hibernateException;
