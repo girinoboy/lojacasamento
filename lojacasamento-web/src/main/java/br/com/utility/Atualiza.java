@@ -84,7 +84,7 @@ public class Atualiza {
 					lojaDTO = lojaDAO.getById(new LojaDTO(transactionSummary.getReference()));
 					produtoDTO.setLojaDTO(lojaDTO==null?new LojaDTO(transactionSummary.getReference()):lojaDTO);
 					produtoDTO.setDescricao(produto.getDescription());
-					produtoDTO.setPreco(new BigDecimal(0));
+					produtoDTO.setPreco(new BigDecimal(produto.getWeight()==null ? 0:produto.getWeight()));
 					produtoDTO.setImagem("produto-sem-imagem.gif");
 				}
 				t.setProdutoDTO(produtoDTO);
@@ -101,10 +101,10 @@ public class Atualiza {
 		}
 	}
 	
-//	@Timeout
-//    public void timeout(Timer timer) {
-//        System.out.println("Current Time : " + timer.toString());
-//    }
+	@Timeout
+    public void timeout(Timer timer) {
+        System.out.println("Current Time : " + timer.toString());
+    }
 //	
 //	@Timeout
 //    public void execute1(java.util.Timer timer) {

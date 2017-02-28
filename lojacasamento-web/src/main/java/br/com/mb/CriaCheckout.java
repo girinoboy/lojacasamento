@@ -246,7 +246,7 @@ public class CriaCheckout extends GenericMB<LojaDTO>{
 		          new CheckoutRegistrationBuilder() //
 		              .withCurrency(Currency.BRL) //
 		              .withExtraAmount(BigDecimal.ONE) //
-		              .withReference(abstractDTO.getNome())//gerar um numero aleatorio
+		              .withReference(abstractDTO.getNome())//gerar um numero aleatorio		              
 		              .withSender(new SenderBuilder()//
 		                  .withEmail("comprador@uol.com.br")//
 		                  .withName("Jose Comprador")
@@ -272,7 +272,7 @@ public class CriaCheckout extends GenericMB<LojaDTO>{
 		                  .withDescription(produtoDTO.getDescricao()) //
 		                  .withAmount(valorUsual)//
 		                  .withQuantity(1)
-		                  .withWeight(1000))
+		                  .withWeight(produtoDTO.getPreco().intValue()))
 
 		              
 
