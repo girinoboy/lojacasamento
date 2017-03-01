@@ -10,27 +10,27 @@
 		<p:panel id="panel" header="#{msgs.newProduct}">
 		    <h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
 			    <p:outputPanel id="photo">
-		            <p:graphicImage name="demo/images/brand/#{criaCheckout.filename}" rendered="#{not empty criaCheckout.filename}" width="120" height="120" />
+		            <p:graphicImage name="demo/images/brand/#{fileUploadView.filename}" rendered="#{not empty fileUploadView.filename}" width="120" height="120" />
 		        </p:outputPanel>
-			    <p:fileUpload fileUploadListener="#{criaCheckout.handleFileUpload}" mode="advanced" dragDropSupport="true" auto="true"
+			    <p:fileUpload fileUploadListener="#{fileUploadView.handleFileUpload}" mode="advanced" dragDropSupport="true" auto="true"
 	                          update="messages,photo" sizeLimit="500000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" required="true"/>
 		    </h:panelGrid>
 		 	<h:panelGrid columns="2" cellpadding="5">
 		 		<p:outputLabel for="idDescricao" value="#{msgs.description}:" />
 	            
 	            <p:outputLabel for="idPreco" value="#{msgs.price}:" />
-	            <p:inputText id="idDescricao" value="#{criaCheckout.produtoDTO.descricao}" required="true" label="#{msgs.description}"/>
+	            <p:inputText id="idDescricao" value="#{fileUploadView.produtoDTO.descricao}" required="true" label="#{msgs.description}"/>
 	            
-	            <p:inputNumber id="idPreco" value="#{criaCheckout.produtoDTO.preco}" decimalPlaces="2" required="true" emptyValue="empty" minValue="0" decimalSeparator="," thousandSeparator="."/>
+	            <p:inputNumber id="idPreco" value="#{fileUploadView.produtoDTO.preco}" decimalPlaces="2" required="true" emptyValue="empty" minValue="0" decimalSeparator="," thousandSeparator="."/>
 	            
 		    </h:panelGrid>
-	<!-- 		<p:fileUpload value="#{criaCheckout.file}" mode="simple" skinSimple="true" update="photo"/> -->
-		    <p:commandButton value="#{msgs.save}" ajax="true" actionListener="#{criaCheckout.upload}" update="panel,panelDetalhe"/>
+	<!-- 		<p:fileUpload value="#{fileUploadView.file}" mode="simple" skinSimple="true" update="photo"/> -->
+		    <p:commandButton value="#{msgs.save}" ajax="true" actionListener="#{fileUploadView.upload}" update="panel,panelDetalhe"/>
 	    </p:panel>
 	    <br/>
 	    <p:separator />
 	    <p:outputPanel id="panelDetalhe">
-		    <p:repeat value="#{criaCheckout.abstractDTO.listProduto}" var="produto">
+		    <p:repeat value="#{fileUploadView.abstractDTO.listProduto}" var="produto">
 		        <h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
 		        	<p:commandLink update=":form:carDetail" oncomplete="PF('produtoEditDialog').show()" immediate="true">
 		                <f:setPropertyActionListener value="#{produto}" target="#{criaCheckout.produtoDTO}" />
@@ -59,7 +59,7 @@
             <p:panelGrid  columns="2" rendered="#{not empty criaCheckout.produtoDTO}" columnClasses="label,value">
                 <f:facet name="header">
                 	<p:graphicImage name="demo/images/brand/#{criaCheckout.produtoDTO.imagem}" width="120" height="120"/>
-                	<p:fileUpload value="#{criaCheckout.file}" mode="simple" skinSimple="true"/>
+                	<p:fileUpload value="#{fileUploadView.file}" mode="simple" skinSimple="true"/>
                 </f:facet>
  
                 <h:outputText value="#{msgs.description}:" />
