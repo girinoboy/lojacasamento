@@ -6,6 +6,8 @@ import java.lang.reflect.ParameterizedType;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.annotation.Resource;
 import javax.faces.application.FacesMessage;
@@ -19,6 +21,8 @@ import br.com.dao.GenericDAO;
 import br.com.dto.GenericDTO;
 @SuppressWarnings("unchecked")
 public class GenericMB<T> implements Serializable{
+	
+	protected static final Logger LOGGER = Logger.getLogger( GenericMB.class.getName() );
 	
 	/**
 	 * 
@@ -49,6 +53,7 @@ public class GenericMB<T> implements Serializable{
 		if(!abstractList.isEmpty()){
 			abstractDTO = abstractList.iterator().next();
 		}
+		
 	}
 	
 	public GenericMB() {
@@ -65,6 +70,10 @@ public class GenericMB<T> implements Serializable{
 			abstractList = abstractDAO.list();//
 		} catch (Exception e) {
 			e.printStackTrace();
+			String msg = e.getMessage();
+			Exception thrown = e;
+			Level level = Level.SEVERE;
+			LOGGER.log(level, msg, thrown);
 		}
 	}
 	

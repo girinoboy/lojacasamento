@@ -24,16 +24,16 @@
 		<view-id value="/index.xhtml" />
 	</url-mapping>
 	
-	<url-mapping id="index">
+	<url-mapping id="arrecadar">
 		<pattern value="/#{idLoja: criaCheckout.abstractDTO.nome}" />
-		<view-id value="/index.xhtml" />
+		<view-id value="/arrecadar.xhtml" />
 		<action onPostback="false">#{criaCheckout.inicio}</action>	
 	</url-mapping>
 
-	<url-mapping id="config">
-		<pattern value="/#{idLoja: fileUploadView.abstractDTO.nome}/config" />
-		<view-id value="/fileupload.xhtml" />
-		<action onPostback="false">#{fileUploadView.inicio}</action>	
+	<url-mapping id="editar">
+		<pattern value="/#{idLoja: criaCheckout.abstractDTO.nome}/config" />
+		<view-id value="/editar.xhtml" />
+		<action onPostback="false">#{criaCheckout.inicio}</action>	
 	</url-mapping>
 
 </pretty-config>
