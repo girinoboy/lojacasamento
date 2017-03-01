@@ -1,44 +1,46 @@
-package br.com.mb;
+package br.com.pagseguroexemplo;
 
 import java.math.BigDecimal;
 
 import br.com.uol.pagseguro.api.PagSeguro;
 import br.com.uol.pagseguro.api.PagSeguroEnv;
+import br.com.uol.pagseguro.api.common.domain.BankName;
 import br.com.uol.pagseguro.api.common.domain.ShippingType;
 import br.com.uol.pagseguro.api.common.domain.builder.AddressBuilder;
+import br.com.uol.pagseguro.api.common.domain.builder.BankBuilder;
 import br.com.uol.pagseguro.api.common.domain.builder.PaymentItemBuilder;
 import br.com.uol.pagseguro.api.common.domain.builder.PhoneBuilder;
+import br.com.uol.pagseguro.api.common.domain.builder.ReceiverBuilder;
 import br.com.uol.pagseguro.api.common.domain.builder.SenderBuilder;
 import br.com.uol.pagseguro.api.common.domain.builder.ShippingBuilder;
+import br.com.uol.pagseguro.api.common.domain.builder.SplitBuilder;
 import br.com.uol.pagseguro.api.common.domain.enums.Currency;
 import br.com.uol.pagseguro.api.common.domain.enums.State;
 import br.com.uol.pagseguro.api.credential.Credential;
 import br.com.uol.pagseguro.api.http.JSEHttpClient;
-import br.com.uol.pagseguro.api.transaction.register.DirectPaymentRegistrationBuilder;
+import br.com.uol.pagseguro.api.transaction.register.SplitPaymentRegistrationBuilder;
 import br.com.uol.pagseguro.api.transaction.search.TransactionDetail;
 import br.com.uol.pagseguro.api.utils.logging.SimpleLoggerFactory;
 
 /**
  * @author PagSeguro Internet Ltda.
  */
-public class CreateDirectPaymentWithBankSlip {
+public class CreateSplitPaymentWithOnlineDebit {
 
-  public static void main(String[] args){
-
+  public static void main(String[] args) {
 	  String sellerEmail = "marcleonio@gmail.com";
-	  String sellerToken = "D19055F3A2D54AD48B37C23BC15545D4";
+	  String sellerToken = "D19055F3A2D54AD48B37C23BC15545D4";	
 
     final PagSeguro pagSeguro = PagSeguro
         .instance(new SimpleLoggerFactory(), new JSEHttpClient(),
             Credential.sellerCredential(sellerEmail, sellerToken), PagSeguroEnv.SANDBOX);
-    
-    try{
-      // Checkout transparente (pagamento direto) com boleto
-      TransactionDetail bankSlipTransaction =
-          pagSeguro.transactions().register(new DirectPaymentRegistrationBuilder()
+
+    try {
+      // Checkout transparente (pagamento direto) com debito online
+      TransactionDetail onlineDebitSplitTransaction =
+          pagSeguro.transactions().register(new SplitPaymentRegistrationBuilder()
               .withPaymentMode("default")
               .withCurrency(Currency.BRL)
-              .withExtraAmount(new BigDecimal(100.00))
               .addItem(new PaymentItemBuilder()//
                   .withId("0001")//
                   .withDescription("Produto PagSeguroI") //
@@ -73,14 +75,33 @@ public class CreateDirectPaymentWithBankSlip {
                       .withComplement("99o andar")
                       .withDistrict("Jardim Internet")
                       .withNumber("9999")
-                      .withStreet("Av. PagSeguro")))
-          ).withBankSlip();
-      System.out.println(bankSlipTransaction);
-      
-      
+                      .withStreet("Av. PagSeguro"))
+              )
+              .withPrimaryReceiver(new ReceiverBuilder()
+                  .withPublicKey("publickey1")
+                  .withSplit(new SplitBuilder()
+                      .withFeePercent(new BigDecimal(50))
+                  )
+              )
+              .addReceiver(new ReceiverBuilder()
+                  .withPublicKey("publickey1")
+                  .withSplit(new SplitBuilder()
+                      .withFeePercent(new BigDecimal(50))
+                  )
+              )
+              .addReceiver(new ReceiverBuilder()
+                  .withPublicKey("publickey2")
+                  .withSplit(new SplitBuilder()
+                      .withFeePercent(new BigDecimal(50))
+                  )
+              )
+          ).withOnlineDebit(new BankBuilder()
+              .withName(BankName.Name.BANCO_DO_BRASIL)
+          );
+      System.out.println(onlineDebitSplitTransaction);
     }catch (Exception e){
       e.printStackTrace();
     }
+
   }
 }
-

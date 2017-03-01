@@ -1,4 +1,4 @@
-package br.com.mb;
+package br.com.pagseguroexemplo;
 
 import javax.xml.bind.DatatypeConverter;
 
