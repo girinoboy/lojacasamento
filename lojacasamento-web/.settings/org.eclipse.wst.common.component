@@ -7,9 +7,6 @@
         <dependent-module archiveName="lojacasamento-core-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/lojacasamento-core/lojacasamento-core">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="pagseguro-api-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/pagseguro-api/pagseguro-api">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <property name="context-root" value="lojacasamento-web"/>
         <property name="java-output-path" value="/lojacasamento-web/target/classes"/>
     </wb-module>

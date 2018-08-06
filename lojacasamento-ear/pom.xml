@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<name>lojacasamento-ear</name>
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>lojacasamento-ear</groupId>
+	<groupId>br.com.ear</groupId>
 	<artifactId>lojacasamento-ear</artifactId>
 	<packaging>ear</packaging>
 	<version>1.0</version>
@@ -37,7 +37,7 @@
 					<displayName>lojacasamento-ear</displayName>
 					<modules>
 						<webModule>
-							<groupId>lojacasamento-ear</groupId>
+							<groupId>br.com.web</groupId>
 							<artifactId>lojacasamento-web</artifactId>
 							<contextRoot>/</contextRoot>
 						</webModule>
@@ -50,21 +50,21 @@
 	</build>
 	<dependencies>
 		<dependency>
-			<groupId>lojacasamento-ear</groupId>
+			<groupId>br.com.core</groupId>
 			<artifactId>lojacasamento-core</artifactId>
 			<version>1.0</version>
 			<type>ejb</type>
 		</dependency>
 		
 		<dependency>
-			<groupId>lojacasamento-ear</groupId>
+			<groupId>br.com.pagseguro</groupId>
 			<artifactId>pagseguro-api</artifactId>
 			<version>1.0</version>
 			<type>ejb</type>
 		</dependency>
 
 		<dependency>
-			<groupId>lojacasamento-ear</groupId>
+			<groupId>br.com.web</groupId>
 			<artifactId>lojacasamento-web</artifactId>
 			<version>1.0</version>
 			<type>war</type>
